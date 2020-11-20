@@ -101,6 +101,7 @@ const slice = createSlice({
             }
             
         },
+        abandonedGroup:(state,action)=>{state.hasGroup=false},
         clearUAlert:(state,action)=>{state.msg=false},
         setUserName:(state,action)=>{state.name=action.payload},
         setVerified:(state,action)=>{state.verified=true},
@@ -134,7 +135,7 @@ const slice = createSlice({
 })
 
 // Destructure and export the plain action creators
-export const {setUserName,setPhoto,setVerified,setAlert,clearUAlert} = slice.actions
+export const {setUserName,setPhoto,setVerified,setAlert,clearUAlert,abandonedGroup} = slice.actions
 
 // Define a thunk that dispatches those action creators
 

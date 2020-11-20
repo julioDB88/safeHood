@@ -7,7 +7,7 @@ import DialogInput from 'react-native-dialog-input';
 import ImagePicker from 'react-native-image-picker';
 import { Icon } from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native'
-import { updateDisplayName,updateUserPhoto } from '../../reducers/userSlice';
+import { updateDisplayName,updateUserPhoto,abandonedGroup } from '../../reducers/userSlice';
 import { removeAccount, userLogout } from '../../reducers/authSlice';
 
 import {useSelector,useDispatch} from 'react-redux';
@@ -50,10 +50,11 @@ const options = {
     //mods
 
     const clearAllData=()=>{
-    
+        dispatch(abandonedGroup())
         dispatch(removeAllGroup({groupId:group.id,userId:user.uid})) 
     }
     const quitFromGroup=()=>{
+
         if(group.isAdmin){
             return  Alert.alert(   
                     'Eres Administrador!',
@@ -66,6 +67,7 @@ const options = {
             );
         } 
         
+        dispatch(abandonedGroup())
         dispatch(removeUserFromGroup({groupId:group.id,userId:user.uid}));
           
      }
@@ -134,10 +136,12 @@ const options = {
      }
     const deleteAccount =  (password) =>{ 
         setremoveAccountDialog(false)
+
         if(group.exists){
            
             group.isAdmin ? clearAllData() :  removeUserFromGroup({groupId:group.id,userId:user.uid})
         }
+    dispatch(abandonedGroup())
         
             
        dispatch(removeAccount({uid:user.uid,password:password}))
