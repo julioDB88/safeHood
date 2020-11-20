@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
-import { Text,View,StyleSheet, Image} from 'react-native'
+import { Text,View,StyleSheet, Image,TouchableOpacity, Dimensions} from 'react-native'
+import Lightbox from 'react-native-lightbox';
 import {useSelector} from 'react-redux'
 import ayuda from '../../assets/img/help.png'
 import suministro from '../../assets/img/electricidad.png'
@@ -18,7 +19,6 @@ const Item =  ({data} ) => {
 
   const members = useSelector(state => state.members)
  const getImage=()=>{
-   let img;
    switch(data.type.type){
      case 'Robo': 
      return robo;
@@ -40,6 +40,7 @@ const Item =  ({data} ) => {
      return vial;
    }
  }
+ console.log(data.photo);
   let user =members.members.find(elem=>elem.uid==data.uid)
 return  (<View style={[styles.container,{borderColor:data.type.color}]}>
             <View style={[styles.header,{borderBottomColor:data.type.color}]}>
@@ -48,10 +49,17 @@ return  (<View style={[styles.container,{borderColor:data.type.color}]}>
             </View>
             <View style={styles.body}>
               <View style={{flexDirection:'row',justifyContent:'space-between',flex:1}}>
-                  <Text style={styles.text}>{data.message}</Text>
                   <Image source={getImage()} style={styles.avatar} />
+                  <Text style={styles.text}>{data.message}</Text>
+                 
               </View>
+             
             </View>
+            {(data.photo !== 'none') && <Lightbox underlayColor="white" renderHeader={close => (
+        <TouchableOpacity onPress={close} style={{flex:1}}>
+          <Text style={styles.closeButton}>Cerrar</Text>
+        </TouchableOpacity>
+      )}><Image source={{uri:data.photo}} re style={{flex:1, height:100,resizeMode:'cover'}}/></Lightbox> }
         </View>)
 } 
 
@@ -60,6 +68,16 @@ return  (<View style={[styles.container,{borderColor:data.type.color}]}>
     container:{margin:6,padding:10,borderWidth:2,borderRadius:10},
     header:{flexDirection:'row',justifyContent:'space-between',borderBottomWidth:1},
     body:{flexDirection:'row',paddingVertical:5},
+    closeButton: {
+      color: 'white',
+      borderWidth: 1,
+      borderColor: 'white',
+      padding: 8,
+      borderRadius: 3,
+      textAlign: 'center',
+      margin: 10,
+      alignSelf: 'flex-end',
+    },
     item: {
       flexDirection:'row',
       flex:1,

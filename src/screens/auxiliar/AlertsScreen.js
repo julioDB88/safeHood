@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Modal, TextInput, Alert,Image, } from 'react-native'
 
-
+import { Icon } from 'react-native-elements'
 import street from '../../assets/img/street.png'
 import help from '../../assets/img/help.png'
 import elect from '../../assets/img/electricidad.png'
@@ -15,6 +15,19 @@ import report from '../../assets/img/report.png'
 import {postNewAlert} from '../../reducers/alertsSlice'
 import {useSelector,useDispatch} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
+import ImagePicker from 'react-native-image-picker';
+
+const options = {
+    title: 'Selecciona Imagen ',
+    storageOptions: {
+      skipBackup: true,
+      path: 'images',
+    },
+    chooseFromLibraryButtonTitle:'Abrir Galeria',
+    takePhotoButtonTitle:'Hacer foto',
+    mediaType:'photo'
+  };
+
 
 export default AlertsScreen=()=> {
   
@@ -26,26 +39,42 @@ export default AlertsScreen=()=> {
   const [alertType, setalertType] = useState('none')
   const [alertMessage, setalertMessage] = useState()
   const [modalVisible, setmodalVisible] = useState(false)
-    
+    const [imageData, setimageData] = useState(null)
 
   const handleModal = () =>  setmodalVisible(!modalVisible)
 
+const getImageAlert=()=>{
+  ImagePicker.showImagePicker(options, async (response) => {
+        
+    if (response.didCancel) {
+        return 
+    } else if (response.error) {
+        return  Alert.alert('Error','Ha ocurrido un error: ' +response.error);
+    } else {
+       setimageData(response) 
+    }
+  });
+  return
+}
   const postAlert = (type) => {
     if(alertMessage.length < 6 || alertMessage.length >120 ){
       return Alert.alert('Error','Solo texto entre 6 y 50 caracteres')
     }
+ 
     let alert= {
       groupId:group.id,
       data:{  
         uid:user.uid,
         time: Date.now(),
         message:alertMessage,
-        type:alertType
+        type:alertType,
+        photo:imageData || 'none'
       }
     }
+    
     handleModal()
     dispatch(postNewAlert(alert))
-    
+    setimageData(null)
     navigation.navigate('Group',{screen:'Alertas'})
   }
 
@@ -133,11 +162,19 @@ export default AlertsScreen=()=> {
         <Modal visible={modalVisible} >
           <View style={{flex:1,justifyContent:'space-between'}}>
             <View>
-              
+            <Image source={megafono} style={styles.modalImage}/>
                 <Text style={styles.modalTitle}>Estas enviando un aviso de: {alertType.type}</Text>
-                <Image source={megafono} style={styles.modalImage}/>
+             
+                <TouchableOpacity  onPress={() => getImageAlert()}  style={{justifyContent:'center',alignItems:'center',borderColor:'rgba(0, 177, 106, 1)',borderWidth:3,width:200,alignSelf:'center',marginVertical:40,paddingVertical:15}}>
+                  
+                  < View style={{justifyContent:'center',alignItems:'center'}}>
+                    <Icon name="camera" color="rgba(0, 177, 106, 1)" size={50}  type='font-awesome'/>
+                    <Text style={{color:'rgba(0, 177, 106, 1)',fontFamily:'goldman',fontSize:18}}>Añadir Imagen</Text>
+                </View>
+                </TouchableOpacity>
+               
                 <TextInput multiline={true} placeholder="Sucede algo..." style={{margin:10,borderRadius:5,borderWidth:1, borderColor:'gray'}} onChangeText={(text) => setalertMessage(text)} />
-              
+           
                 <TouchableOpacity  onPress={() => postAlert()} style={{backgroundColor:'rgba(0, 177, 106, 1)', paddingVertical:10,width:300,alignSelf:'center',borderRadius:5,}}>
                     <Text style={{textAlign:'center',fontWeight:'bold',color:'white'}}>Enviar</Text> 
             </TouchableOpacity>
@@ -217,6 +254,6 @@ const styles = StyleSheet.create({
     borderRadius:64,
     borderColor:'rgba(0, 177, 106, 1)',
     alignSelf:'center',
-    marginVertical:20,
+    marginTop:20,
   }
 })

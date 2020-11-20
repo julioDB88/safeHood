@@ -13,6 +13,7 @@ import { removeAccount, userLogout } from '../../reducers/authSlice';
 import {useSelector,useDispatch} from 'react-redux';
 import { removeAllGroup, removeUserFromGroup,setGroupPhoto } from '../../reducers/groupSlice';
 import anon from '../../assets/img/anon.png'
+
 const options = {
     title: 'Selecciona Avatar',
     storageOptions: {
@@ -20,7 +21,8 @@ const options = {
       path: 'images',
     },
     chooseFromLibraryButtonTitle:'Abrir Galeria',
-    takePhotoButtonTitle:'Hacer foto'
+    takePhotoButtonTitle:'Hacer foto',
+    mediaType:'photo'
   };
 
 
