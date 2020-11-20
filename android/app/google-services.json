@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "877882699314",
+    "firebase_url": "https://safehood-24b48.firebaseio.com",
+    "project_id": "safehood-24b48",
+    "storage_bucket": "safehood-24b48.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877882699314:android:e0b0017cda26c68d6d162b",
+        "android_client_info": {
+          "package_name": "com.safehood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877882699314-o6m5crsed4cp6rbnb6gk4m4dg34l929k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ9qh5qU9KcyYvuhmkJ3boHqjAjEwtLI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877882699314-o6m5crsed4cp6rbnb6gk4m4dg34l929k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
