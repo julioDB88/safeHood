@@ -31,7 +31,8 @@ $ npm run nojet
 
 Tiene el mapa de Google necesitaras proporcionar tu propia ApiKey en el archivo AnndroidManifest.xml
 
-![Safehood](/sagfehod-home.png=250x250)
+![Safehood]
+<img src="https://github.com/julioDB88/safeHood/blob/master/sagfehod-home.png" width="250" height="250">
 
 ### Development
 
