@@ -33,9 +33,10 @@ export const setGroupPhoto = createAsyncThunk('group/updatePhoto',async (data,st
 })
 
 export const removeAllGroup = createAsyncThunk('group/removeAll',async (data,{dispatch})=>{
-    console.log('removing allg grou');
+ 
     let groupRef = await database().ref(`/groups/${data.groupId}/users`)
-
+    await storage().ref(`/groupAlerts/${data.groupId}`).listAll().then(item=> item.items.forEach(item=>item.delete()))
+    await storage().ref(`/groupAvatars/${data.groupId}`).list().then(item=> item.items.forEach(item=>item.delete()));
     //aviso a los usuarios y les elimino el groupId de su database
     await groupRef.once('value').then(snap=>{
         
@@ -226,7 +227,7 @@ export const slice = createSlice({
             state.msg=false
         },
         [removeAllGroup.rejected]:(state,action)=>{
-           
+           console.log(action);
          },
          [removeUserFromGroup.fulfilled]:(state,action)=>{
             state.id=null,
@@ -245,5 +246,5 @@ export const slice = createSlice({
     }
 })
 
-export const {switchRole,setNewGroupData,clearGroupData,setGroupAlert,clearGroupAlert} = slice.actions
+export const {switchRole,setNewGroupData,clearGroupData,setGroupAlert,clearGroupAlert,setGPhoto} = slice.actions
 export default slice.reducer;

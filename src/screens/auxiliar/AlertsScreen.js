@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Modal, TextInput, Alert,Image, } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, ScrollView, Modal, TextInput, Alert,Image, ActivityIndicator, } from 'react-native'
 
 import { Icon } from 'react-native-elements'
 import street from '../../assets/img/street.png'
@@ -35,7 +35,7 @@ export default AlertsScreen=()=> {
 
   const { user,group } = useSelector(state => state);
   const dispatch = useDispatch()
-
+const [showLoaded, setshowLoaded] = useState(true)
   const [alertType, setalertType] = useState('none')
   const [alertMessage, setalertMessage] = useState()
   const [modalVisible, setmodalVisible] = useState(false)
@@ -52,8 +52,10 @@ const getImageAlert=()=>{
         return  Alert.alert('Error','Ha ocurrido un error: ' +response.error);
     } else {
        setimageData(response) 
+       setshowLoaded(false)
     }
   });
+
   return
 }
   const postAlert = (type) => {
@@ -71,7 +73,7 @@ const getImageAlert=()=>{
         photo:imageData || 'none'
       }
     }
-    
+    setshowLoaded(true)
     handleModal()
     dispatch(postNewAlert(alert))
     setimageData(null)
@@ -170,6 +172,7 @@ const getImageAlert=()=>{
                   < View style={{justifyContent:'center',alignItems:'center'}}>
                     <Icon name="camera" color="rgba(0, 177, 106, 1)" size={50}  type='font-awesome'/>
                     <Text style={{color:'rgba(0, 177, 106, 1)',fontFamily:'goldman',fontSize:18}}>Añadir Imagen</Text>
+                    <Icon size={30} name="done" color="rgba(0, 177, 106, 1)" disabled={showLoaded} disabledStyle={{display:'none'}}/>
                 </View>
                 </TouchableOpacity>
                

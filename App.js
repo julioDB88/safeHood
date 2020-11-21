@@ -11,6 +11,7 @@ import { Alert} from 'react-native';
 
 import Authrouter from './src/routers/AuthRouter'
 import AppRouter from './src/routers/AppRouter';
+
 import SplashScreen from './src/screens/auxiliar/SplashScreen';
 import authen from '@react-native-firebase/auth';
 import VerificationEmail from './src/screens/auth/verificationEmail';
@@ -37,6 +38,8 @@ admob()
 
 const App: () => React$Node = () => {
 
+
+
   const dispatch = useDispatch()
   const  {user,auth,group}  = useSelector(state =>state);
 
@@ -50,7 +53,7 @@ const App: () => React$Node = () => {
 
 
   useEffect(() => {
-   
+ 
     const subscriber = authen().onAuthStateChanged(onAuthStateChanged);
     return subscriber; 
   

@@ -20,6 +20,7 @@ const netInfo = useNetInfo();
 
 if(netInfo.isConnected){
    return (<Provider store={store}>
+
         <StatusBar hidden={true} />
        <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.FULL_BANNER}/>
       <App />

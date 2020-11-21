@@ -23,7 +23,7 @@ export const removeAccount = createAsyncThunk('auth/removeAccount', async data=>
     let reauth= await auth().currentUser.reauthenticateWithCredential(credential)
     .then(dat=>{ auth().currentUser.delete();return {type:'ok'};   })
     .catch(e=>{ return {type:'error',msg: e}})
-    console.log(reauth);
+    
     return reauth
    
  

@@ -40,7 +40,7 @@ const Item =  ({data} ) => {
      return vial;
    }
  }
- console.log(data.photo);
+ 
   let user =members.members.find(elem=>elem.uid==data.uid)
 return  (<View style={[styles.container,{borderColor:data.type.color}]}>
             <View style={[styles.header,{borderBottomColor:data.type.color}]}>

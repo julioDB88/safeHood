@@ -29,7 +29,7 @@ if(group.exists && !alerts.fetched){
               renderItem={renderAlert}
               keyExtractor={(item,index) => index.toString()}/>
           
-          ) : (<View style={styles.container}><Image source={image} style={styles.image} /><Text style={styles.text}>Sin solicitudes</Text></View>)}
+          ) : (<View style={styles.container}><Image source={image} style={styles.image} /><Text style={styles.text}>Sin Alertas</Text></View>)}
 
         </View>
   )

@@ -42,7 +42,7 @@ const UsersScreen =(props)=>{
         dispatch(fetchMembers(group.id))
     }
     const renderUser=({item})=>(<UserItem user={item} remove={confirmRemove} setAdmin={confirmNewAdmin} />)
-    console.log(members.members.length ==1);
+ 
 
       return(<View style={styles.container}>
           {members.members.length >1? 

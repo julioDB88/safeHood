@@ -143,7 +143,7 @@ const options = {
            
             group.isAdmin ? clearAllData() :  removeUserFromGroup({groupId:group.id,userId:user.uid})
         }
-    dispatch(abandonedGroup())
+        dispatch(abandonedGroup())
         
             
        dispatch(removeAccount({uid:user.uid,password:password}))
@@ -168,33 +168,33 @@ const options = {
                 </View>
                 <TouchableOpacity  onPress={()=>handleNickDialog()} style={styles.item}>
                     <View style={styles.nickbar}>
-                            <Text style={styles.itemText}>{user.name || 'Anonymous '}</Text>
-                            <Icon name="edit" adjustsFontSizeToFit="true"/>
+                            <Text style={styles.itemTitle}>{user.name || 'Anonymous '}</Text>
+                            <Icon name="edit" adjustsFontSizeToFit="true" color="rgb(0, 177, 106)"/>
                     
                     </View>
                 </TouchableOpacity>
 
                 { group.exists ? 
                     (<TouchableOpacity  onPress={()=>confirmQuitGroup()} style={styles.item}>
-                    <Text style={{fontSize:18}}>Salir del Grupo</Text>
+                    <Text style={styles.itemText}>Salir del Grupo</Text>
                     </TouchableOpacity>)
                     :
                     (<TouchableOpacity  onPress={()=>navigation.navigate('Home')} style={styles.item}>
-                    <Text style={{fontSize:18}}>Buscar Grupo</Text>
+                    <Text style={styles.itemText}>Buscar Grupo</Text>
                     </TouchableOpacity>)
                 }   
 
                 {group.isAdmin && 
                  (<TouchableOpacity  onPress={()=>updateGroupPhoto()} style={styles.item}>
-                 <Text style={{fontSize:18}}>Cambiar foto grupo</Text>
+                 <Text style={styles.itemText}>Cambiar foto grupo</Text>
                  </TouchableOpacity>)
                 }
 
                 <TouchableOpacity  onPress={()=>handleLogout()} style={styles.item}>
-                    <Text style={{color:'red',fontSize:18}}>Logout</Text>
+                    <Text style={styles.itemText}>Logout</Text>
                 </TouchableOpacity>
                 <TouchableOpacity  onPress={()=>setremoveAccountDialog(true)} style={styles.item}>
-                    <Text style={{fontSize:18}}>Eliminar cuenta</Text>
+                    <Text style={styles.itemText}>Eliminar cuenta</Text>
                 </TouchableOpacity>
                 <DialogInput isDialogVisible={nickDialog}
                             title={"Cambiar Nick"}
@@ -243,12 +243,22 @@ const styles = StyleSheet.create({
         borderBottomWidth:2,
   
     },
-    itemText:{
+    itemTitle:{
         textAlign:'center',
         paddingVertical:5,
         fontSize:22,
-        marginRight:15
-     
+        marginRight:15,
+        color:'rgb(0, 177, 106)',
+        fontFamily:'goldman'
+        
+    },
+    itemText:{
+        
+        paddingVertical:2,
+        fontSize:18,
+        marginRight:15,
+        color:'rgb(0, 177, 106)',
+        fontFamily:'goldman'
         
     },
     nickbar:{
