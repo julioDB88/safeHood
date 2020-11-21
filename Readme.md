@@ -29,7 +29,7 @@ $ npm run nojet
 
 ### Plugins
 
-Tiene el mapa de Google necesitaras proporcionar tu propia ApiKey en el archivo AnndroidManifest.xml
+Tiene el mapa de Google necesitaras proporcionar tu propia ApiKey en el archivo AndroidManifest.xml
 
 ![Safehood]
 <img src="https://github.com/julioDB88/safeHood/blob/master/sagfehod-home.png" width="250" height="450">
