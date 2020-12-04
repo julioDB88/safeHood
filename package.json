@@ -1,6 +1,7 @@
 {
   "name": "safehood",
   "version": "0.0.1",
+  "author": "Julio Desplat",
   "private": true,
   "scripts": {
     "nojet": "react-native run-android --no-jetifier",
